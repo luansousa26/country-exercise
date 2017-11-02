@@ -1,0 +1,3 @@
+[submodule "5semana"]
+	path = 5semana
+	url = https://github.com/blacktbird/5semana.git
