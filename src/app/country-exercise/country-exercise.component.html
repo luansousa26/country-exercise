@@ -1,0 +1,38 @@
+<div class="navbar"></div>
+<div align="center"><h3>Country Exercise</h3></div>
+<div class="ui-g">
+  <!-- drag div that make a interator in availableCities get in the getAllCities() method-->
+  <div class="ui-g-3 ui-sm-12">
+      <div align="left"> Cities available to drag</div><br/>
+    <div *ngFor="let cities of availableCities" (onDragStart)="dragStart($event,cities)" dnd-draggable [dragEnabled]="true" [dragData]="availableCities">
+      <div class="item">
+        <div class="closeButton">...X</div>
+        <div>{{cities.LocalName}}</div>
+      </div>
+      <br/>
+    </div>
+  </div>
+  
+  <br/>
+  <!-- drop div here cointais the coutries avaliables to drop it make a interator in avaliableCountries get in the getAllCountries() method  -->
+  <div class="ui-g-3 ui-sm-12">
+      <div align="left">Countries available to drop</div><br/>
+      <div *ngFor="let country of avaliableCountries" style="float:left; margin-right:10px;" dnd-droppable class="panel panel-info"
+        (onDropSuccess)="droped($event,country)">
+        <div>
+          <div class="closeButton">...X</div>
+          <div [hidden]="!avaliableCountries.length > 0" class="item" [ngStyle]="{'background-color': country.availableCities? '#B4C7E7' : '#F8CBAD', 'height': 'auto'}">{{country.LocalName}}
+            <div [hidden]="country.availableCities === undefined" class="itemCountry">
+              <div class="closeButton" (click)="removeCity(country)">...X</div>
+              {{country.availableCities}}</div>
+          </div>
+          <br/>
+        </div>
+      </div>
+    </div>
+<!-- Here we has the Json that is updated when a city is droped in a country -->
+  <div class="ui-g-6 ui-sm-12">
+    <pre>{{viewJson | json}}</pre>
+  </div>
+</div>
+  
